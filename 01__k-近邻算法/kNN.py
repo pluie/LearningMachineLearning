@@ -58,8 +58,8 @@ def autoNorm(dataSet):
     return normDataSet, ranges, minVals
 
 # 测试正确率   
-def datingClassTest():
-    hoRatio = 0.5 # 将数据分成训练、测试两份；可使用交叉方法，此处没有
+def datingClassTest(hoRatio=0.5, k=6):
+    # hoRatio将数据分成训练、测试两份；可使用交叉方法，此处没有
     datingDataMat,datingLabels = file2matrix('datingTestSet.txt') # 得到numpy数据
     normMat, ranges, minVals = autoNorm(datingDataMat) # 归一化
     m = normMat.shape[0]
@@ -69,10 +69,14 @@ def datingClassTest():
         classifierResult = classify0(normMat[i,:],
                                      normMat[numTestVecs:m,:],
                                      datingLabels[numTestVecs:m],
-                                     8)
+                                     k)
         print("the classifier came back with: %d, the real answer is: %d"
               % (classifierResult, datingLabels[i]))
         if classifierResult != datingLabels[i]:
             errorCount += 1
     print("the total error rate is: %f" % (errorCount/float(numTestVecs)))
     print(errorCount)
+
+
+if __name__ == '__main__':
+    datingClassTest(0.5, 6)
