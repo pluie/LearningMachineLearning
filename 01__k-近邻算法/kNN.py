@@ -1,5 +1,5 @@
-#python 3.5.3rc1#
-#################
+# python 3.5.3rc1 #
+###################
 import numpy as np
 import operator
 from os import listdir
